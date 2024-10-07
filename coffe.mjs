@@ -9,7 +9,7 @@ export function makeCoffee(name) {
       setTimeout(() => {
         const number = Math.random();
         if (number > 0.3) {
-          isSuccess = true;gti
+          isSuccess = true;
         }
   
         if (!isSuccess) {
