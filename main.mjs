@@ -1,19 +1,26 @@
-import { makeCoffee, sendCoffe } from './coffe.mjs';
+import { makeCoffee, sendCoffee } from './coffee.mjs';
 
-const order = 'Coffee Ekpreso';
-console.log(`Saya memesan ${order} di warkop`);
+const order = 'Kopi Espresso';
 
-makeCoffee(order,(makeCoffeeError, makeCoffeeData)=>{
-   if(makeCoffeeError){
-      console.error(makeCoffeeError);
-      return;
-   }
-sendCoffe(makeCoffeeData,(sendCoffeError, sendCoffeData)=>{
-   if(sendCoffeError){
-      console.error(sendCoffeError);
-      return;
-   }
-   console.log(`Pramusaji memberikan ${sendCoffeData} pesanan.`);
-   console.log(`Saya mendapatkan ${sendCoffeData} dan menghabiskannya.`);
-   });
-});
+console.log(`Saya memesan ${order} di kafe.`);
+
+makeCoffee(order)
+  .then(
+    (value) => {
+      return sendCoffee(value);
+    },
+    (error) => {
+      console.error(error.message);
+      throw error;
+    },
+  )
+  .then(
+    (value) => {
+      console.log(`Pramusaji memberikan ${value} pesanan.`);
+      console.log(`Saya mendapatkan ${value} dan menghabiskannya.`);
+    },
+    (error) => {
+      console.error(error.message);
+      throw error;
+    },
+  );
